@@ -888,6 +888,11 @@ registry-url@^5.0.0:
   dependencies:
     rc "^1.2.8"
 
+repl@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/repl/-/repl-0.1.3.tgz#2f05d42b0c88b43d05ccbda10ed14aeff5699b60"
+  integrity sha1-LwXUKwyItD0FzL2hDtFK7/Vpm2A=
+
 responselike@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/responselike/-/responselike-1.0.2.tgz#918720ef3b631c5642be068f15ade5a46f4ba1e7"
