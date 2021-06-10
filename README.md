@@ -2,6 +2,7 @@
 * formidable
 * repl
 * .npmrc, .nvmrc
+* crypto-js
 
 ##### How run ?
   ```  yarn & yarn start```
@@ -67,3 +68,10 @@ Add this, at end line of your shell (bashrc, zshrc),
 **npmrc** is a config file for (node-package-manager) we can set specify config for your project such as registry, engine-strict and more.
 
 - you can see more in [npmrc](https://docs.npmjs.com/cli/v7/configuring-npm/npmrc)
+
+---
+
+#### Crypto-js
+
+JavaScript library of crypto standards.
+

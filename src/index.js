@@ -1,6 +1,8 @@
 const express = require('express');
 const formidable = require('formidable');
+//using repl for debugger in bash
 const repl = require('repl');
+const CryptoJS = require("crypto-js");
 
 const PORT = 3000;
 
@@ -20,7 +22,7 @@ app.get('/',(req,res)=>{
   </form>
 `)
 })
-
+// Using formidable for upload files
 app.post('/upload', (req, res, next) => {
   const form = formidable({ multiples: true });
   form.parse(req, (err, fields, files) => {
@@ -33,7 +35,24 @@ app.post('/upload', (req, res, next) => {
   });
 });
 
+//using hash with library crypto-js
+const crypto = ()=>{
+  console.log("HmacSHA1");
+  console.log(CryptoJS.HmacSHA1("Message", "Key"));
+  console.log("SHA256");
+  console.log(CryptoJS.SHA256("Message").words.toString('hex'));
+}
+const SECRET = 'Teste'
+
+function enc(plainText){
+    var b64 = CryptoJS.AES.encrypt(plainText, SECRET).toString();
+    var e64 = CryptoJS.enc.Base64.parse(b64);
+    var eHex = e64.toString(CryptoJS.enc.Hex);
+    return eHex;
+}
 
 app.listen(PORT,(req,res)=>{
   console.log("Server running on ", PORT)
+  crypto()
+  console.log(enc(SECRET));
 })
