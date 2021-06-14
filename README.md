@@ -3,6 +3,8 @@
 * repl
 * .npmrc, .nvmrc
 * crypto-js
+* path
+* fs
 
 ##### How run ?
   ```  yarn & yarn start```
@@ -80,3 +82,9 @@ JavaScript library of crypto standards.
 #### Path
 
 JavaScript library for resolve directorys.
+
+---
+
+#### FileSystem
+
+The fs module enables interacting with the file system in a way modeled on standard POSIX functions.
