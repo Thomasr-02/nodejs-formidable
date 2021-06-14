@@ -75,3 +75,8 @@ Add this, at end line of your shell (bashrc, zshrc),
 
 JavaScript library of crypto standards.
 
+---
+
+#### Path
+
+JavaScript library for resolve directorys.

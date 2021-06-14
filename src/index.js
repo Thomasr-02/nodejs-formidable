@@ -2,7 +2,12 @@ const express = require('express');
 const formidable = require('formidable');
 //using repl for debugger in bash
 const repl = require('repl');
+//using for create hashs
 const CryptoJS = require("crypto-js");
+//using for find directory,filename
+const path = require('path');
+//using for manage files
+const fs = require('fs').promises;
 
 const PORT = 3000;
 
@@ -51,8 +56,18 @@ function enc(plainText){
     return eHex;
 }
 
+async function readFile(filePath) {
+  try {
+    const data = await fs.readFile(filePath);
+    console.log(data.toString());
+  } catch (error) {
+    console.error(`Got an error trying to read the file: ${error.message}`);
+  }
+}
+
 app.listen(PORT,(req,res)=>{
   console.log("Server running on ", PORT)
   crypto()
+  readFile(path.resolve(__dirname,'..', 'greetings.txt'));
   console.log(enc(SECRET));
 })
