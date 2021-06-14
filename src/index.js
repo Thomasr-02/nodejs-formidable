@@ -1,23 +1,25 @@
-const express = require('express');
-const formidable = require('formidable');
+const express = require("express");
+//using formidable for upload files
+const formidable = require("formidable");
 //using repl for debugger in bash
-const repl = require('repl');
-//using for create hashs
+const repl = require("repl");
+//using crypto-js for create hashs
 const CryptoJS = require("crypto-js");
-//using for find directory,filename
-const path = require('path');
-//using for manage files
-const fs = require('fs').promises;
+//using path for find directory,filename etc
+const path = require("path");
+//using fs for manage files
+const fs = require("fs").promises;
 
 const PORT = 3000;
+const SECRET = "Teste";
 
 const app = express();
 
-app.get('/health',(req,res)=>{
-  res.send("Server running")
-})
+app.get("/health", (req, res) => {
+  res.send("Server running");
+});
 
-app.get('/',(req,res)=>{
+app.get("/", (req, res) => {
   res.send(`
   <h2>With <code>"express"</code> npm package</h2>
   <form action="/upload" enctype="multipart/form-data" method="post">
@@ -25,38 +27,36 @@ app.get('/',(req,res)=>{
     <div>File: <input type="file" name="someExpressFiles" multiple="multiple" /></div>
     <input type="submit" value="Upload" />
   </form>
-`)
-})
-// Using formidable for upload files
-app.post('/upload', (req, res, next) => {
+`);
+});
+
+app.post("/upload", (req, res, next) => {
   const form = formidable({ multiples: true });
   form.parse(req, (err, fields, files) => {
     if (err) {
       next(err);
       return;
     }
-    console.log("Uploaded")
+    console.log("Uploaded");
     res.json({ fields, files });
   });
 });
 
-//using hash with library crypto-js
-const crypto = ()=>{
+const crypto = () => {
   console.log("HmacSHA1");
   console.log(CryptoJS.HmacSHA1("Message", "Key"));
   console.log("SHA256");
-  console.log(CryptoJS.SHA256("Message").words.toString('hex'));
-}
-const SECRET = 'Teste'
+  console.log(CryptoJS.SHA256("Message").words.toString("hex"));
+};
 
-function enc(plainText){
-    var b64 = CryptoJS.AES.encrypt(plainText, SECRET).toString();
-    var e64 = CryptoJS.enc.Base64.parse(b64);
-    var eHex = e64.toString(CryptoJS.enc.Hex);
-    return eHex;
-}
+const enc = (plainText) => {
+  const b64 = CryptoJS.AES.encrypt(plainText, SECRET).toString();
+  const e64 = CryptoJS.enc.Base64.parse(b64);
+  const eHex = e64.toString(CryptoJS.enc.Hex);
+  return eHex;
+};
 
-async function readFile(filePath) {
+const readFile = async (filePath)=>{
   try {
     const data = await fs.readFile(filePath);
     console.log(data.toString());
@@ -65,9 +65,13 @@ async function readFile(filePath) {
   }
 }
 
-app.listen(PORT,(req,res)=>{
-  console.log("Server running on ", PORT)
-  crypto()
-  readFile(path.resolve(__dirname,'..', 'greetings.txt'));
+app.listen(PORT, (req, res) => {
+  console.log("Server running on ", PORT);
+  console.log("\n----------------------------------------");
+  console.log("Learning more about CRYPTO-JS\n");
+  crypto();
   console.log(enc(SECRET));
-})
+  console.log("\n----------------------------------------");
+  console.log("Learning more about FS\n");
+  readFile(path.resolve(__dirname, "..", "greetings.txt"));
+});
